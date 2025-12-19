@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лабораторна 5 - Варіант 11 (Fixed)</title>
+    <style>
+
+        body { margin: 0; padding: 20px; font-family: Arial, sans-serif; }
+        
+
+        .container {
+            display: grid;
+            grid-template-columns: 200px 1fr 200px; 
+            grid-template-rows: 100px 60px 300px 100px; 
+            gap: 5px;
+            max-width: 1000px;
+            margin: 0 auto;
+            border: 1px solid #333;
+        }
+
+        .block {
+            border: 1px solid #000;
+            padding: 10px;
+            position: relative;
+            overflow: auto; 
+        }
+
+
+        
+
+        #block1 {
+            grid-column: 1 / 3; 
+            grid-row: 1 / 2;
+            background-color: #dae8fc;
+        }
+
+
+        #block2 {
+            grid-column: 3 / 4;
+            grid-row: 1 / 5; 
+            background-color: #d5e8d4;
+        }
+
+
+        #block3 {
+            grid-column: 1 / 2;
+            grid-row: 2 / 4;
+            background-color: #ffe6cc;
+        }
+
+
+        #block4 {
+            grid-column: 2 / 3;
+            grid-row: 2 / 3;
+            background-color: #ffe6cc;
+        }
+
+
+        #block5 {
+            grid-column: 2 / 3;
+            grid-row: 3 / 4;
+            background-color: #ffffff;
+        }
+
+
+        #block6 {
+            grid-column: 1 / 3;
+            grid-row: 4 / 5;
+            background-color: #dae8fc;
+        }
+
+
+        .swappable {
+            display: inline-block;
+            padding: 5px 10px;
+            border: 1px solid black;
+            background: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        #block6 .swappable { float: right; } 
+
+        .delete-btn {
+            display: block;
+            margin-top: 5px;
+            background: #ffcccc;
+            border: 1px solid red;
+            cursor: pointer;
+            font-size: 12px;
+            width: 100%;
+        }
+
+
+        @media (max-width: 600px) {
+            .container { display: flex; flex-direction: column; }
+            .block { height: auto; min-height: 100px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="block" id="block1">
+            <span class="block-num">1</span>
+            <div id="x-content" class="swappable">SHERMAN THE BASSMAN</div> 
+            <p>Це офіційний сайт фірми Sherman the Bassman</p>
+			</div>
+
+        <div class="block" id="block4">
+            <b>Магазин, якому довіряють сотні музикантів по всій Україні!</b>
+        </div>
+
+        <div class="block" id="block3">
+            
+            <p>Бас-гітара (або просто бас) — струнно-щипковий музичний інструмент, який використовують для гри в басовому діапазоні. Бас-гітара є інструментом для створення ритму разом із барабанами, тож бас є необхідною частину будь якого музичного колективу. На бас-гітарі грають переважно пальцями, або медіатором.</p>
+      
+        </div>
+
+        <div class="block" id="block5">
+            <span class="block-num">5</span>
+            <p>Основний контент блоку 5.</p>
+            <div id="task2-result"></div> <div id="task3-container"></div> <div id="task4-container"></div> <div id="task5-container"></div> </div>
+
+        <div class="block" id="block2">
+             <h3>Меню</h3>
+            <ul class="menu">
+                <li><a href="mobile.html">Головна</a></li>
+                <li><a href="lab1web2.html">Фото</a></li>
+                <li><a href="lab1web3.html">Сайти</a></li>
+                <li><a href="lab1web4.html">Де знайти</a></li>
+                <li><a href="lab1web5.html">Автор</a></li>
+            </ul>
+            <h4>Кнопки видалення CSS:</h4>
+            <div id="buttons-container"></div> </div>
+
+        <div class="block" id="block6">
+                        <h3>Тут поки нічого немає</h3>
+            <p>Але автори цінують вашу кмітливість</p>
+            <div id="y-content" class="swappable">БАС-ГІТАРИ НА БУДЬ-ЯКИЙ СМАК</div> </div>
+    </div>
+
+    <script>
+
+        function swapXY() {
+            const x = document.getElementById('x-content');
+            const y = document.getElementById('y-content');
+            const temp = x.innerHTML;
+            x.innerHTML = y.innerHTML;
+            y.innerHTML = temp;
+        }
+
+        swapXY();
+
+
+        function calculateRectArea(a, b) {
+            return a * b;
+        }
+
+        const width = 15;
+        const height = 10;
+        const area = calculateRectArea(width, height);
+        
+
+        const block5 = document.getElementById('block5');
+        const resDiv = document.createElement('div');
+        resDiv.innerHTML = `<b>Завдання 2:</b> Площа прямокутника (${width}x${height}) = ${area}`;
+        resDiv.style.borderTop = "1px solid #ccc";
+        resDiv.style.marginTop = "10px";
+        block5.appendChild(resDiv);
+
+
+
+        const cookieKey = "minCountData";
+        const formContainer = document.getElementById('task3-container');
+
+
+        function setCookie(name, value, days) {
+            let expires = "";
+            if (days) {
+                let date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                expires = "; expires=" + date.toUTCString();
+            }
+            document.cookie = name + "=" + (value || "") + expires + "; path=/";
+        }
+
+        function getCookie(name) {
+            let nameEQ = name + "=";
+            let ca = document.cookie.split(';');
+            for (let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+                if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+            }
+            return null;
+        }
+
+        function eraseCookie(name) {
+            document.cookie = name + '=; Max-Age=-99999999; path=/;';
+        }
+
+
+        const savedData = getCookie(cookieKey);
+
+        if (savedData) {
+
+            const userWantsToSave = confirm(`Cookies знайдено: ${savedData}. \nНатисніть "ОК", щоб зберегти дані.\nНатисніть "Скасувати", щоб видалити.`);
+
+            if (userWantsToSave) {
+
+                alert("Cookies наявні. Необхідно перезавантажити сторінку (форма не буде показана).");
+                formContainer.innerHTML = "<i>Форма прихована. Дані збережені в Cookies. Видаліть кукі для нової спроби.</i>";
+            } else {
+ 
+                eraseCookie(cookieKey);
+                location.reload();
+            }
+        } else {
+
+            formContainer.innerHTML = `
+                <hr>
+                <b>Завдання 3:</b> Введіть 10 чисел через кому:<br>
+                <input type="text" id="numsInput" value="5, 2, 9, 2, 6, 2, 8, 10, 3, 4" style="width: 80%">
+                <button onclick="processMinNumbers()">Визначити</button>
+            `;
+        }
+
+        function processMinNumbers() {
+            const input = document.getElementById('numsInput').value;
+            const arr = input.split(',').map(n => parseFloat(n.trim())).filter(n => !isNaN(n));
+            
+            if (arr.length !== 10) {
+                alert("Будь ласка, введіть рівно 10 чисел.");
+                return;
+            }
+
+            const minVal = Math.min(...arr);
+            const count = arr.filter(n => n === minVal).length;
+
+            const resultMsg = `Мінімальне: ${minVal}, Кількість: ${count}`;
+            alert(resultMsg);
+            
+
+            setCookie(cookieKey, resultMsg, 1);
+
+            location.reload();
+        }
+
+
+
+        const lsItalicKey = "italicState";
+        const block3 = document.getElementById('block3');
+        const task4Div = document.getElementById('task4-container');
+
+
+        task4Div.innerHTML = `
+            <hr><b>Завдання 4:</b> 
+            <label><input type="checkbox" id="italicCheck"> Включити курсив для Блоку 3 (keypress)</label>
+        `;
+        const checkbox = document.getElementById('italicCheck');
+
+
+        if (localStorage.getItem(lsItalicKey) === 'true') {
+            checkbox.checked = true;
+            block3.style.fontStyle = 'italic';
+        }
+
+
+        document.addEventListener('keypress', function(e) {
+            if (checkbox.checked) {
+                block3.style.fontStyle = 'italic';
+                localStorage.setItem(lsItalicKey, 'true');
+            }
+        });
+
+
+        checkbox.addEventListener('change', function() {
+            if (!this.checked) {
+                block3.style.fontStyle = 'normal';
+                localStorage.removeItem(lsItalicKey);
+            }
+        });
+
+
+
+        const yBlock = document.getElementById('y-content'); 
+        const cssFormDiv = document.getElementById('task5-container');
+        const buttonsDiv = document.getElementById('buttons-container'); 
+        const lsCssKey = "cssRules";
+
+
+        let savedRules = JSON.parse(localStorage.getItem(lsCssKey)) || [];
+        
+        function renderDeleteButtons() {
+            buttonsDiv.innerHTML = ""; 
+            savedRules.forEach((rule, index) => {
+                try {
+                    const els = document.querySelectorAll(rule.selector);
+                    els.forEach(el => el.style[rule.prop] = rule.val);
+                } catch(e) { console.log("Invalid selector"); }
+
+                const btn = document.createElement('button');
+                btn.className = 'delete-btn';
+                btn.innerText = `Видалити: ${rule.selector}`;
+                btn.onclick = function() { deleteRule(index); };
+                buttonsDiv.appendChild(btn);
+            });
+        }
+        
+
+        function deleteRule(index) {
+
+            const rule = savedRules[index];
+            try {
+                const els = document.querySelectorAll(rule.selector);
+                els.forEach(el => el.style[rule.prop] = ""); 
+            } catch(e){}
+
+
+            savedRules.splice(index, 1);
+            
+
+            localStorage.setItem(lsCssKey, JSON.stringify(savedRules));
+            
+
+            renderDeleteButtons();
+        }
+
+        renderDeleteButtons(); 
+        document.getElementById('block6').addEventListener('dblclick', function() { 
+             cssFormDiv.innerHTML = `
+                <hr><b>Завдання 5:</b> CSS Генератор<br>
+                <input type="text" id="cssSel" placeholder="Селектор (напр. #block3)" style="width:90%"><br>
+                <input type="text" id="cssProp" placeholder="Властивість (напр. background)" style="width:45%">
+                <input type="text" id="cssVal" placeholder="Значення (напр. red)" style="width:45%"><br>
+                <button onclick="addCssRule()">Додати CSS</button>
+            `;
+        });
+
+        function addCssRule() {
+            const sel = document.getElementById('cssSel').value;
+            const prop = document.getElementById('cssProp').value;
+            const val = document.getElementById('cssVal').value;
+
+            if(sel && prop && val) {
+                const newRule = { selector: sel, prop: prop, val: val };
+                savedRules.push(newRule);
+                localStorage.setItem(lsCssKey, JSON.stringify(savedRules));
+                
+        
+                renderDeleteButtons();
+                alert("Правило додано! Кнопка видалення з'явилася в Блоці 2.");
+            }
+        }
+
+    </script>
+</body>
+</html>
